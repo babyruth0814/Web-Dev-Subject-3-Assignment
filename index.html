@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Janelle's Subject 3 Assignment</title>
+  <title>Nursing Agency Employee Database</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"> <!-- Added your CSS link -->
 </head>
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #00274d;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Janelle's Subject 3 App</a>
+      <a class="navbar-brand" href="#" style="border-bottom: 3px solid #c8b560;">Nursing Agency Employee Database</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -34,31 +35,139 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <h1 class="fw-light">The Web Dev Subject 3 Assignment Demo</h1>
-        <p class="lead text-muted">
-          This software demonstrates the structure of a multi-page frontend web application that interacts with a live REST API backend. Some pages are interactive and connected to the API; others serve as layout placeholders. Use the navigation above to explore each component.
-        </p>
-        <p class="lead text-muted">
-            As students in this course,  you are not expected to make your assignment look EXACTLY like this demo,  
-            but you are expected to meet the functional requirements asked of you in the assignment.
-        </p>
-        <p class="lead text-muted">
-            The four pages in this demo which meet the REST API requirements of the assignment are the Profile page, the Edit page,
-            the Upload page,  and the Data View page.  There are 10 pages in total,  which is another requirment of the assignment.
-        </p>
-        <p><span class="badge bg-secondary">Bootstrap 5</span> <span class="badge bg-info text-dark">REST API Integration</span> <span class="badge bg-success">10+ Page Structure</span></p>
-        <div class="alert alert-info mt-4">
-          <strong>Need help?</strong> Visit the <a href="api.html" class="alert-link">API Reference</a> page for example calls and endpoint details.
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <h1 class="fw-light">Nursing Agency Employee Database</h1>
+      <p class="lead text-muted">
+        This software is an Employee Database for a Nursing Agency.
+      </p>
+      <p class="lead text-muted">
+        Use the navigation above and the buttons below to explore each component.
+      </p>
+      <p>
+        <span class="badge bg-secondary">Bootstrap 5</span>
+        <span class="badge bg-info text-dark">REST API Integration</span>
+        <span class="badge bg-success">10+ Page Structure</span>
+      </p>
+      <div class="alert alert-info mt-4">
+        <strong>Need help?</strong> Visit the <a href="api.html" class="alert-link">API Reference</a> page for example calls and endpoint details.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cards Section -->
+<section class="container py-5">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <!-- Profile Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0" style="border-top: 4px solid #004225;">
+        <div class="card-header text-white" style="background-color: #00274d;">Profile</div>
+        <div class="card-body">
+          <p class="card-text">View employee profile details.</p>
+          <a href="profile.html" class="btn" style="background-color: #004225; color: #fff;">Go to Profile</a>
         </div>
       </div>
     </div>
-  </section>
+    <!-- Edit Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0" style="border-top: 4px solid #004225;">
+        <div class="card-header text-white" style="background-color: #00274d;">Edit</div>
+        <div class="card-body">
+          <p class="card-text">Edit employee information and save updates.</p>
+          <a href="edit.html" class="btn" style="background-color: #004225; color: #fff;">Go to Edit</a>
+        </div>
+      </div>
+    </div>
+    <!-- Upload Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0" style="border-top: 4px solid #004225;">
+        <div class="card-header text-white" style="background-color: #00274d;">Upload</div>
+          <div class="card-body">
+          <p class="card-text">Upload employee documents or files.</p>
+          <a href="upload.html" class="btn" style="background-color: #004225; color: #fff;">Go to Upload</a>
+        </div>
+      </div>
+    </div>
+    <!-- Todo Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0" style="border-top: 4px solid #004225;">
+        <div class="card-header text-white" style="background-color: #00274d;">To do</div>
+          <div class="card-body">
+          <p class="card-text">Manage pending tasks and assignments.</p>
+          <a href="todo.html" class="btn" style="background-color: #004225; color: #fff;">Go to To do</a>
+        </div>
+      </div>
+    </div>
+    <!-- Data View Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0" style="border-top: 4px solid #004225;">
+        <div class="card-header text-white" style="background-color: #00274d;">Data View</div>
+          <div class="card-body">
+          <p class="card-text">Browse and filter employee database records.</p>
+          <a href="data-view.html" class="btn" style="background-color: #004225; color: #fff;">Go to Data View</a>
+        </div>
+      </div>
+    </div>
+    <!-- Stats Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0" style="border-top: 4px solid #004225;">
+        <div class="card-header text-white" style="background-color: #00274d;">Stats</div>
+          <div class="card-body">
+          <p class="card-text">View statistics and reports on employees.</p>
+          <a href="stats.html" class="btn" style="background-color: #004225; color: #fff;">Go to Stats</a>
+        </div>
+      </div>
+    </div>
+    <!-- Forms Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0" style="border-top: 4px solid #004225;">
+        <div class="card-header text-white" style="background-color: #00274d;">Forms</div>
+          <div class="card-body">
+          <p class="card-text">Access forms to manage employee data.</p>
+          <a href="forms.html" class="btn" style="background-color: #004225; color: #fff;">Go to Forms</a>
+        </div>
+      </div>
+    </div>
+    <!-- Help Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0" style="border-top: 4px solid #004225;">
+        <div class="card-header text-white" style="background-color: #00274d;">Help</div>
+          <div class="card-body">
+          <p class="card-text">Find help and troubleshooting guides.</p>
+          <a href="help.html" class="btn" style="background-color: #004225; color: #fff;">Go to Help</a>
+        </div>
+      </div>
+    </div>
+    <!-- Legal Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0" style="border-top: 4px solid #004225;">
+        <div class="card-header text-white" style="background-color: #00274d;">Legal</div>
+          <div class="card-body">
+          <p class="card-text">Review company legal and compliance info.</p>
+          <a href="legal.html" class="btn" style="background-color: #004225; color: #fff;">Go to Legal</a>
+        </div>
+      </div>
+    </div>
+    <!-- API Reference Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0" style="border-top: 4px solid #004225;">
+        <div class="card-header text-white" style="background-color: #00274d;">API Reference</div>
+          <div class="card-body">
+          <p class="card-text">View API documentation and endpoints.</p>
+          <a href="api.html" class="btn" style="background-color: #004225; color: #fff;">Go to API Reference</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  
 
   <!-- Footer -->
-  <footer class="text-muted py-4 bg-light">
+  <footer>
     <div class="container text-center">
       <p class="mb-1">&copy; 2025 Velodata.org | Web Dev Subject 3 Assignment</p>
     </div>
