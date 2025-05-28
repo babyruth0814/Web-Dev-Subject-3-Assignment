@@ -1,43 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Todo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <style>
-    .form-wrapper {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO App</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="/Lesson-11/style.css"> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #status-message {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #loading {
+            font-style: italic;
+            color: blue;
+        }
+
+        #todo-input {
+            padding: 10px;
+            width: 250px;
+            margin-right: 10px;
+        }
+
+        #add-todo,
+        #clear-completed {
+            padding: 10px 15px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+            opacity: 0.7;
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body class="d-flex align-items-center" style="min-height: 100vh;">
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #00274d; position: absolute; top: 0; width: 100%;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html" style="border-bottom: 3px solid #c8b560;">Nursing Agency Employee Database</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link active" href="todo.html">Todo</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<body>
 
-  <!-- Page Content -->
-  <div class="container text-start">
-    <div class="form-wrapper">
-      <h1 class="mb-4 mt-5">Todo Page</h1>
-      <p>Watch this space... We're making some improvements which will be available to you soon.</p>
-    </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-absolute top-0 w-100">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">API Explorer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="data-view.html">To Do App</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <h1 style="margin-top: 100px;">The "Things to do today" App</h1>
+    <p id="status-message"></p>
+    <div id="loading" style="display: none;">Loading...</div>
+
+    <input type="text" id="todo-input" placeholder="Enter a new TODO">
+    <button id="add-todo">Add TODO</button>
+    <button id="clear-completed">Clear Completed</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Created At</th>
+                <th>Complete</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="todo-table-body"></tbody>
+    </table>
+
+    <!-- <script src="script.js"></script> -->
+    <script>
+        // Select elements
+        const todoInput = document.getElementById("todo-input");
+        const addTodoButton = document.getElementById("add-todo");
+        const clearCompletedButton = document.getElementById("clear-completed");
+        const todoTableBody = document.getElementById("todo-table-body");
+        const statusMessage = document.getElementById("status-message");
+        const loadingIndicator = document.getElementById("loading");
+
+        // Load saved TODOs from localStorage on page load
+        document.addEventListener("DOMContentLoaded", loadTodos);
+
+        // Function to display messages
+        function showMessage(message, isError = false) {
+            statusMessage.textContent = message;
+            statusMessage.style.color = isError ? "red" : "green";
+            setTimeout(() => { statusMessage.textContent = ""; }, 3000);
+        }
+
+        // Function to show/hide loading indicator
+        function setLoading(isLoading) {
+            loadingIndicator.style.display = isLoading ? "block" : "none";
+        }
+
+        // Function to load TODOs from localStorage
+        function loadTodos() {
+            let todos = JSON.parse(localStorage.getItem("todos")) || [];
+            todos.forEach(renderTodo);
+        }
+
+        // Function to save TODOs to localStorage
+        function saveTodosToLocalStorage(todos) {
+            localStorage.setItem("todos", JSON.stringify(todos));
+        }
+
+        // Function to add a TODO
+        function addTodo() {
+            const todoText = todoInput.value.trim();
+            if (todoText === "") {
+                showMessage("Please enter a valid TODO!", true);
+                return;
+            }
+
+            const newTodo = {
+                text: todoText,
+                completed: false,
+                createdAt: new Date().toLocaleString(),
+            };
+
+            let todos = JSON.parse(localStorage.getItem("todos")) || [];
+            todos.push(newTodo);
+            saveTodosToLocalStorage(todos);
+
+            renderTodo(newTodo);
+            todoInput.value = "";
+            showMessage("TODO added successfully!");
+        }
+
+        // Function to render a TODO item in the table
+        function renderTodo(todo) {
+            const row = document.createElement("tr");
+
+            const taskCell = document.createElement("td");
+            taskCell.textContent = todo.text;
+            if (todo.completed) {
+                taskCell.classList.add("completed");
+            }
+
+            const dateCell = document.createElement("td");
+            dateCell.textContent = todo.createdAt;
+
+            // Create a checkbox for completion
+            const completeCheckbox = document.createElement("input");
+            completeCheckbox.type = "checkbox";
+            completeCheckbox.checked = todo.completed; // ✅ Reflects actual state
+            completeCheckbox.addEventListener("change", () => toggleComplete(todo.text, taskCell, completeCheckbox));
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "🗑";
+            deleteButton.addEventListener("click", () => deleteTodo(todo.text, row));
+
+            const completeCell = document.createElement("td");
+            completeCell.appendChild(completeCheckbox);
+
+            const deleteCell = document.createElement("td");
+            deleteCell.appendChild(deleteButton);
+
+            row.appendChild(taskCell);
+            row.appendChild(dateCell);
+            row.appendChild(completeCell);
+            row.appendChild(deleteCell);
+
+            todoTableBody.appendChild(row);
+        }
+
+        // Function to toggle TODO completion
+        function toggleComplete(todoText, taskCell, checkbox) {
+            let todos = JSON.parse(localStorage.getItem("todos")) || [];
+            todos = todos.map(todo => {
+                if (todo.text === todoText) {
+                    todo.completed = checkbox.checked; // ✅ Update based on checkbox state
+                }
+                return todo;
+            });
+
+            saveTodosToLocalStorage(todos);
+            taskCell.classList.toggle("completed", checkbox.checked);
+        }
+
+        // Function to delete a TODO
+        function deleteTodo(todoText, row) {
+            let todos = JSON.parse(localStorage.getItem("todos")) || [];
+            todos = todos.filter(todo => todo.text !== todoText);
+            saveTodosToLocalStorage(todos);
+            row.remove();
+            showMessage("TODO deleted!");
+        }
+
+        // Function to clear completed TODOs
+        function clearCompleted() {
+            let todos = JSON.parse(localStorage.getItem("todos")) || [];
+            todos = todos.filter(todo => !todo.completed);
+            saveTodosToLocalStorage(todos);
+
+            // Remove completed items from UI
+            document.querySelectorAll(".completed").forEach(todo => todo.parentElement.remove());
+            showMessage("Completed TODOs cleared!");
+        }
+
+        // Event listeners
+        addTodoButton.addEventListener("click", addTodo);
+        clearCompletedButton.addEventListener("click", clearCompleted);
+        todoInput.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                addTodo();
+            }
+        });
+
+    </script>
 </body>
+
 </html>
