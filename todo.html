@@ -9,11 +9,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-    <!-- <link rel="stylesheet" href="/Lesson-11/style.css"> -->
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            min-height: 100vh; /* Ensure the body takes up the full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Push footer to the bottom */
         }
 
         #status-message {
@@ -62,14 +65,18 @@
             padding: 5px 10px;
             cursor: pointer;
         }
+
+        /* Ensure footer is not affected by other content */
+        footer {
+            margin-top: auto;
+        }
     </style>
 </head>
 
 <body>
 
-
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #00274d; position: absolute; top: 0; width: 100%;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #00274d; width: 100%;">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html" style="border-bottom: 3px solid #c8b560;">Nursing Agency Employee Database</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -84,67 +91,67 @@
         </div>
     </nav>
 
+    <div class="container">
+        <h1 style="margin-top: 20px;">The "Things to do today" App</h1>
+        <p id="status-message"></p>
+        <div id="loading" style="display: none;">Loading...</div>
 
+        <input type="text" id="todo-input" placeholder="Enter a new TODO">
+        <button id="add-todo">Add TODO</button>
+        <button id="clear-completed">Clear Completed</button>
 
-    <h1 style="margin-top: 200px;">The "Things to do today" App</h1>
-    <p id="status-message"></p>
-    <div id="loading" style="display: none;">Loading...</div>
-
-    <input type="text" id="todo-input" placeholder="Enter a new TODO">
-    <button id="add-todo">Add TODO</button>
-    <button id="clear-completed">Clear Completed</button>
-
-    <table style="justify-content: center; margin-top: 200px; margin-bottom: 200px;">
-        <thead>
-            <tr>
-                <th>Task</th>
-                <th>Created At</th>
-                <th>Complete</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody id="todo-table-body"></tbody>
-    </table>
-
-      <!-- Footer -->
-<section class="container-fluid" style="background-color: #00274d">
-  <div class="container">
-    <footer class="py-3">
-      <div class="row">
-        <div class="col-md-8 mb-3">
-          <ul class="nav flex-column">
-            <li class="nav-item mb-2">
-              <i class="bi bi-telephone text-light me-3"></i>
-              <p class="d-inline text-light">0404 477 ***</p>          
-            </li>
-            <li class="nav-item mb-2">
-              <a href="#"><i class="bi bi-envelope text-light me-3"></i></a>
-              <p class="d-inline text-light">info@nursingagency.com.au</p>
-            </li>
-            <li class="nav-item mb-2">
-              <a href="#"><i class="bi bi-facebook text-light me-3"></i></a>
-              <a href="#"><i class="bi bi-linkedin text-light me-3"></i></a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-4 col-md-4 mb-5">
-          <h5 class="text-light">LEGAL</h5>
-          <ul class="nav flex-column">
-            <li class="nav-item mb-2">
-              <a href="#" class="nav-link p-0 footerlinksCol text-light">Privacy Policy</a>
-            </li>
-            <li class="nav-item mb-2">
-              <a href="#" class="nav-link p-0 footerlinksCol text-light">Terms and Conditions</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="d-flex flex-column flex-sm-row justify-content-center">
-        <p class="text-light fw-light text-center">&copy; 2025 Velodata.org | Web Dev Subject 3 Assignment</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Created At</th>
+                    <th>Complete</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody id="todo-table-body"></tbody>
+        </table>
     </div>
-    </footer>
-  </div>
-</section>
+
+    <!-- Footer -->
+    <section class="container-fluid" style="background-color: #00274d;">
+        <div class="container">
+            <footer class="py-3">
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2">
+                                <i class="bi bi-telephone text-light me-3"></i>
+                                <p class="d-inline text-light">0404 477 ***</p>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a href="#"><i class="bi bi-envelope text-light me-3"></i></a>
+                                <p class="d-inline text-light">info@nursingagency.com.au</p>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a href="#"><i class="bi bi-facebook text-light me-3"></i></a>
+                                <a href="#"><i class="bi bi-linkedin text-light me-3"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-4 col-md-4 mb-5">
+                        <h5 class="text-light">LEGAL</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2">
+                                <a href="#" class="nav-link p-0 footerlinksCol text-light">Privacy Policy</a>
+                            </li>
+                            <li class="nav-item mb-2">
+                                <a href="#" class="nav-link p-0 footerlinksCol text-light">Terms and Conditions</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row justify-content-center">
+                    <p class="text-light fw-light text-center">&copy; 2025 Velodata.org | Web Dev Subject 3 Assignment</p>
+                </div>
+            </footer>
+        </div>
+    </section>
 
     <!-- <script src="script.js"></script> -->
     <script>

@@ -1,11 +1,23 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
   }
-  
+
+main {
+  flex:1;
+}
+
   .navbar {
     background-color: #00274d;
+    width: 100%;
   }  
   
   .navbar .nav-link.active {
@@ -17,11 +29,10 @@ body {
     color: #fff !important;
   }
   
-  footer {
-    background-color: #e9ecef;
-    text-align: center;
-    padding: 1rem 0;
-    border-top: 3px solid #007bff;
+footer {
+    background-color: #00274d;
+    padding: 20px;
+    color: white;
   }
   
   h1.fw-light {
