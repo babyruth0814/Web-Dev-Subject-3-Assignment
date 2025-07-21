@@ -12,11 +12,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             min-height: 100vh; /* Ensure the body takes up the full viewport height */
             display: flex;
             flex-direction: column;
             justify-content: space-between; /* Push footer to the bottom */
+        }
+
+        .todo-container {
+            text-align: center;
         }
 
         #status-message {
@@ -91,7 +94,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="todo-container container">
         <h1 style="margin-top: 20px;">The "Things to do today" App</h1>
         <p id="status-message"></p>
         <div id="loading" style="display: none;">Loading...</div>
